@@ -1,4 +1,4 @@
-package ecol.api.esserver.server;
+package org.ecol.esserver.server;
 
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.servlet.FilterHolder;
@@ -15,6 +15,8 @@ public class ServerStarter {
 
     private static final int SERVER_PORT = 8680;
 
+    private ServerStarter(){}
+
     public static void main(String[] args) throws  Exception{
 
         ResourceConfig resourceConfig = new  ConfigRestEndPoints().GetRestEndPointsResourceConfig();
@@ -22,7 +24,7 @@ public class ServerStarter {
 
         ServletContextHandler servletContextHandler = new ServletContextHandler(ServletContextHandler.SESSIONS);
         ServletHolder servletHolder = new ServletHolder(new ServletContainer(resourceConfig));
-        servletContextHandler.addServlet(servletHolder,"/rest");
+        servletContextHandler.addServlet(servletHolder,"/rest/*");
 
         // Add the filter, and then use the provided FilterHolder to configure it
         FilterHolder cors = servletContextHandler.addFilter(CrossOriginFilter.class,"/*", EnumSet.of(DispatcherType.REQUEST));
