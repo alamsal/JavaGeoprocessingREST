@@ -18,7 +18,7 @@ public class Statistics {
 
     @GET
     @Path("/zonalSummary")
-    @Produces(MediaType.TEXT_PLAIN)
+    @Produces(MediaType.APPLICATION_JSON)
 
     public String GetZonalSummary() throws Exception {
         String geoJsonGeometry = "{\"type\":\"Feature\",\"properties\":{},\"geometry\":{\"type\":\"Polygon\",\"coordinates\":[[[-117.05932617187501,34.11180455556901],[-117.05932617187501,34.250405862125],[-116.79565429687501,34.250405862125],[-116.79565429687501,34.11180455556901],[-117.05932617187501,34.11180455556901]]]}}";
@@ -31,16 +31,8 @@ public class Statistics {
         connections.SetupConnection();
 
         DataReader dataReader = new DataReader(connections);
-        dataReader.GetZonalSummary();
-
-
-
-
-        return geom.toString();
+        return dataReader.GetZonalSummary();
     }
-
-
-
 }
 
 
